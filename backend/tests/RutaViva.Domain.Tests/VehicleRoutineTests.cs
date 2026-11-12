@@ -194,6 +194,21 @@ public class VehicleRoutineTests
     }
 
     [Fact]
+    public void Restart_raises_the_vehicle_mileage_when_the_actual_mileage_is_higher()
+    {
+        var vehicle = VehicleWith(10_000, null);
+        var routine = vehicle.Routines[0];
+        vehicle.AddRoutine("Corta", 400, null, _today);
+
+        Assert.True(vehicle.RestartCycle(routine.Id, DomainConstants.FirstCycle, 20_500, _today));
+
+        Assert.Equal(20_500, vehicle.CurrentMileage.Value);
+        Assert.Equal(RoutineStatus.UpToDate, routine.Status);
+        Assert.Equal(20_500, routine.Cycle.ReferenceMileage);
+        Assert.Equal(RoutineStatus.Overdue, vehicle.Routines.Single(item => item.Name == "Corta").Status);
+    }
+
+    [Fact]
     public void The_next_reading_notifies_the_new_cycle()
     {
         var vehicle = VehicleWith(10_000, null);

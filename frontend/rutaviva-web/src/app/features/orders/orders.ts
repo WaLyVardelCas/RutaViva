@@ -13,7 +13,7 @@ import { formatKilometers, parseOptionalNumber } from '../../shared/format';
 import { clampPage, pageOf } from '../../shared/pagination';
 import { Order } from '../../shared/models/order';
 
-export type OrderView = 'client' | 'assigned' | 'quotes' | 'progress';
+export type OrderView = 'client' | 'assigned' | 'quotes';
 
 @Component({
   selector: 'app-orders',
@@ -40,8 +40,6 @@ export class Orders {
     switch (this.view()) {
       case 'quotes':
         return orders.filter(order => order.status === OrderStatus.Created || order.status === OrderStatus.Quoted);
-      case 'progress':
-        return orders.filter(order => order.status === OrderStatus.Approved || order.status === OrderStatus.InProgress);
       case 'assigned':
         return orders.filter(order => order.status !== OrderStatus.Completed && order.status !== OrderStatus.Canceled);
       default:
@@ -56,8 +54,6 @@ export class Orders {
     switch (this.view()) {
       case 'quotes':
         return 'No hay órdenes por cotizar ni cotizaciones pendientes.';
-      case 'progress':
-        return 'No hay servicios aprobados o en ejecución.';
       case 'assigned':
         return 'No hay órdenes abiertas.';
       default:

@@ -158,7 +158,7 @@ public class ApplicationFlowTests
     }
 
     [Fact]
-    public void Completing_restarts_the_cycle_without_changing_vehicle_mileage()
+    public void Completing_restarts_the_cycle_with_the_vehicle_mileage()
     {
         AppFixture fixture = new AppFixture();
         var vehicle = fixture.Register.Execute(new RegisterVehicle("FIN001", 20_000, _start));
@@ -169,7 +169,7 @@ public class ApplicationFlowTests
         var order = Assert.Single(fixture.Orders.List(null, vehicle.Id), item => item.RoutineId == addedId);
         fixture.SubmitQuote.Execute(new SubmitQuote(order.Id, 900_000));
         fixture.Start.Execute(new StartService(order.Id));
-        var completedOrder = fixture.Complete.Execute(new CompleteService(order.Id, 50_000, new DateOnly(2026, 7, 5)));
+        var completedOrder = fixture.Complete.Execute(new CompleteService(order.Id, 52_000, new DateOnly(2026, 7, 5)));
 
         Assert.Equal(OrderStatus.Completed, completedOrder.Status);
         var stored = fixture.Vehicles.Get(vehicle.Id)!;
@@ -177,7 +177,7 @@ public class ApplicationFlowTests
         Assert.Equal(52_000, stored.CurrentMileage.Value);
         Assert.Equal(RoutineStatus.UpToDate, aceite.Status);
         Assert.Equal(DomainConstants.FirstCycle + DomainConstants.CycleStep, aceite.Cycle.Number);
-        Assert.Equal(50_000, aceite.Cycle.ReferenceMileage);
+        Assert.Equal(stored.CurrentMileage.Value, aceite.Cycle.ReferenceMileage);
 
         var domainEvent = Assert.Single(fixture.EventLog.List().OfType<ServiceOrderCompleted>());
         fixture.Restart.Handle(domainEvent);
@@ -206,7 +206,28 @@ public class ApplicationFlowTests
     }
 
     [Fact]
-    public void A_higher_actual_mileage_does_not_update_the_vehicle()
+    public void An_actual_mileage_below_the_vehicle_is_rejected_and_the_order_stays_in_progress()
+    {
+        AppFixture fixture = new AppFixture();
+        var vehicle = fixture.Register.Execute(new RegisterVehicle("LOW001", 20_000, _start));
+        fixture.Routines.Execute(new AddRoutine(vehicle.Id, "Aceite", 10_000, null, _start));
+        fixture.Readings.Execute(new RegisterMileageReading("evt-low", "LOW001", 52_000));
+        var addedId = fixture.Vehicles.Get(vehicle.Id)!.Routines.Single(routine => routine.Name == "Aceite").Id;
+        var order = Assert.Single(fixture.Orders.List(null, vehicle.Id), item => item.RoutineId == addedId);
+        fixture.SubmitQuote.Execute(new SubmitQuote(order.Id, 100_000));
+        fixture.Start.Execute(new StartService(order.Id));
+
+        Assert.Throws<BusinessRuleException>(() =>
+            fixture.Complete.Execute(new CompleteService(order.Id, 50_000, new DateOnly(2026, 7, 5))));
+
+        Assert.Equal(OrderStatus.InProgress, fixture.Orders.Get(order.Id)!.Status);
+        var stored = fixture.Vehicles.Get(vehicle.Id)!;
+        Assert.Equal(52_000, stored.CurrentMileage.Value);
+        Assert.Equal(DomainConstants.FirstCycle, stored.Routines.Single(routine => routine.Name == "Aceite").Cycle.Number);
+    }
+
+    [Fact]
+    public void A_higher_actual_mileage_updates_the_vehicle()
     {
         AppFixture fixture = new AppFixture();
         var vehicle = fixture.Register.Execute(new RegisterVehicle("MAY001", 20_000, _start));
@@ -219,7 +240,8 @@ public class ApplicationFlowTests
         fixture.Complete.Execute(new CompleteService(order.Id, 50_300, new DateOnly(2026, 7, 5)));
 
         var stored = fixture.Vehicles.Get(vehicle.Id)!;
-        Assert.Equal(50_000, stored.CurrentMileage.Value);
+        Assert.Equal(50_300, stored.CurrentMileage.Value);
+        Assert.Equal(RoutineStatus.UpToDate, stored.Routines.Single(routine => routine.Name == "Aceite").Status);
         Assert.Equal(50_300, stored.Routines.Single(routine => routine.Name == "Aceite").Cycle.ReferenceMileage);
     }
 }

@@ -26,5 +26,6 @@ public static class DomainConstants
     public const string OrderNotFound = "La orden no existe.";
     public const string RoutineNameRequired = "La rutina necesita un nombre.";
     public const string MileageBeforeReference = "El kilometraje real no puede ser anterior a la referencia del ciclo.";
+    public const string MileageBelowVehicle = "El kilometraje real no puede ser menor al kilometraje actual del vehículo";
     public const string DateBeforeReference = "La fecha real no puede ser anterior a la referencia del ciclo.";
 }

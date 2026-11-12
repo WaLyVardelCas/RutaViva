@@ -1,6 +1,6 @@
 import { Role } from './role';
 
-export type NavIcon = 'home' | 'vehicles' | 'routines' | 'orders' | 'quotes' | 'progress';
+export type NavIcon = 'home' | 'vehicles' | 'routines' | 'orders' | 'quotes';
 
 export interface AppSection {
   path: string;
@@ -61,13 +61,6 @@ export const workshopSections: AppSection[] = [
     documentTitle: 'Órdenes asignadas · RutaViva',
     description: '',
     icon: 'orders'
-  },
-  {
-    path: 'in-progress',
-    heading: 'Servicios en ejecución',
-    documentTitle: 'Servicios en ejecución · RutaViva',
-    description: '',
-    icon: 'progress'
   }
 ];
 

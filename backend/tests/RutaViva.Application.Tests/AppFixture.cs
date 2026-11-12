@@ -33,6 +33,6 @@ internal sealed class AppFixture
         SubmitQuote = new SubmitQuoteHandler(Orders, dispatcher, clock);
         Reject = new RejectQuoteHandler(Orders, dispatcher);
         Start = new StartServiceHandler(Orders, dispatcher);
-        Complete = new CompleteServiceHandler(Orders, dispatcher);
+        Complete = new CompleteServiceHandler(Orders, Vehicles, dispatcher);
     }
 }

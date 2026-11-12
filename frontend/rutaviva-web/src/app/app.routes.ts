@@ -39,12 +39,7 @@ export const routes: Routes = [
         title: 'Cotizaciones · RutaViva',
         data: { heading: 'Cotizaciones', view: 'quotes' }
       },
-      {
-        path: 'in-progress',
-        component: Orders,
-        title: 'Servicios en ejecución · RutaViva',
-        data: { heading: 'Servicios en ejecución', view: 'progress' }
-      }
+      { path: 'in-progress', redirectTo: 'orders' }
     ]
   },
   { path: '**', redirectTo: 'client/home' }

@@ -50,7 +50,7 @@ Cada decisión se etiqueta con su origen:
 | D15 | API y Job comparten las mismas instancias de repositorios en memoria | T | Consecuencia de D14 |
 | D16 | `POST /api/procesos/evaluacion-diaria` con fecha obligatoria ejecuta el mismo comando | T | Confirmada |
 | D17 | El primer ciclo toma el kilometraje actual y la fecha de configuración | T | Confirmada: se fija al configurar la rutina |
-| D18 | El kilometraje actual del vehículo solo cambia por telemetría; el completado no lo modifica | T | Confirmada: "depende de lo que llegue en la telemetría" |
+| D18 | El kilometraje actual del vehículo cambia por telemetría y por el completado (nunca baja); el completado rechaza un kilometraje real menor al del vehículo | T | Revisada: las rutinas no pueden quedar con un kilometraje distinto al del vehículo |
 | D19 | El completado se rechaza si el kilometraje o la fecha real son anteriores a la referencia del ciclo | T | Consecuencia de la regla 14 |
 | D20 | La orden pasa a `Cotizada` solo si el monto requiere aprobación del cliente; si no, va de `Creada` a `Aprobada` | T | Confirmada |
 | D21 | Placa única; la telemetría identifica el vehículo por la placa y el kilometraje viene en km | T | Confirmada junto con D24 |
@@ -186,7 +186,7 @@ Disparadores: una lectura aceptada evalúa solo el criterio de kilometraje y el 
 
 **D20, confirmada.** La orden solo permanece en `Cotizada` cuando el monto supera COP 1.500.000 y hace falta la decisión del cliente. Con un monto menor o igual, `Cotizar()` termina en `Aprobada` dentro de la misma operación. Alternativa descartada: persistir `Cotizada` y aprobar en un segundo paso. Crea un estado en el que la orden nunca permanece y muestra al cliente una cotización pendiente que no requiere su decisión. El paso por la cotización queda en los eventos `OrdenCotizada` y `CotizacionAprobada` (automática).
 
-**D18, confirmada.** Completar el servicio no escribe el kilometraje actual del vehículo, ni cuando el kilometraje real es mayor. Ese valor solo cambia cuando llega una lectura de telemetría con un kilometraje mayor; una lectura menor o igual se ignora. Por eso la referencia del ciclo nuevo puede quedar, un tiempo, por encima del kilometraje actual.
+**D18, revisada.** Completar el servicio rechaza un kilometraje real menor al kilometraje actual del vehículo. Si es mayor, el kilometraje actual del vehículo sube a ese valor, igual que con una lectura de telemetría. Así la referencia del ciclo nuevo coincide siempre con el kilometraje del vehículo y no queda por encima ni por debajo de él.
 
 ### Arquitectura y dependencias
 

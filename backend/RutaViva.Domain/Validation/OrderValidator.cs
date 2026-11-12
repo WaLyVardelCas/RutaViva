@@ -20,6 +20,12 @@ public static class OrderValidator
             throw new BusinessRuleException("La orden solo se puede cancelar antes de iniciar el servicio.");
     }
 
+    public static void RequireNotBelowVehicle(int actualMileage, int vehicleMileage)
+    {
+        if (actualMileage < vehicleMileage)
+            throw new BusinessRuleException($"{DomainConstants.MileageBelowVehicle} ({vehicleMileage}).");
+    }
+
     public static void RequireCompletion(int actualMileage, int referenceMileage, DateOnly actualDate, DateOnly referenceDate)
     {
         MileageValidator.RequireNonNegative(actualMileage, "El kilometraje real no puede ser negativo.");

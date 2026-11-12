@@ -164,14 +164,20 @@ El sistema MUST registrar el evento de vencimiento exactamente una vez por ciclo
 ### Requirement: Reinicio del ciclo al completar el servicio
 Cuando se completa la orden de servicio de una rutina, el sistema MUST iniciar un nuevo ciclo con referencia en el kilometraje y la fecha reales reportados, dejar la rutina en `AlDia` y habilitar nuevamente los eventos de próximo vencimiento y vencimiento.
 
-#### Scenario: Reinicio con kilometraje real menor al actual del vehículo
-- **GIVEN** un vehículo con kilometraje actual 52.000 y una rutina de 10.000 km vencida
-- **WHEN** se completa su orden con kilometraje real 50.000 y fecha 2026-07-05
-- **THEN** la rutina queda `AlDia` con referencia 50.000 km y 2026-07-05
+#### Scenario: Reinicio con kilometraje real mayor al actual del vehículo
+- **GIVEN** un vehículo con kilometraje actual 50.000 y una rutina de 10.000 km vencida
+- **WHEN** se completa su orden con kilometraje real 50.300 y fecha 2026-07-05
+- **THEN** la rutina queda `AlDia` con referencia 50.300 km y 2026-07-05
+- **AND** el kilometraje actual del vehículo pasa a 50.300
+
+#### Scenario: Kilometraje real menor al actual del vehículo
+- **GIVEN** un vehículo con kilometraje actual 52.000 y una orden `EnEjecucion`
+- **WHEN** se intenta completar la orden con kilometraje real 50.000
+- **THEN** el sistema rechaza el completado y la orden permanece `EnEjecucion`
 - **AND** el kilometraje actual del vehículo sigue en 52.000
 
 #### Scenario: El nuevo ciclo se evalúa con la siguiente lectura
-- **GIVEN** una rutina reiniciada con referencia 50.000 km y un vehículo en 52.000 km
+- **GIVEN** una rutina reiniciada con referencia 50.000 km y un vehículo en 50.000 km
 - **WHEN** llega una lectura de 59.100 km
 - **THEN** la rutina pasa a `PorVencer` y registra el evento de próximo vencimiento del nuevo ciclo
 

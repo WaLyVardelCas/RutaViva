@@ -141,7 +141,7 @@ El taller MUST poder iniciar una orden solo cuando está `Aprobada`; al iniciarl
 - **THEN** el sistema rechaza la operación y la orden no cambia
 
 ### Requirement: Completado del servicio
-El taller MUST poder completar una orden solo cuando está `EnEjecucion`, reportando el kilometraje real y la fecha real del mantenimiento. Al completarla, la orden pasa a `Completada`, se registra el evento de orden completada y la rutina reinicia su ciclo con esos valores. El kilometraje actual del vehículo MUST NOT modificarse por el completado.
+El taller MUST poder completar una orden solo cuando está `EnEjecucion`, reportando el kilometraje real y la fecha real del mantenimiento. Al completarla, la orden pasa a `Completada`, se registra el evento de orden completada y la rutina reinicia su ciclo con esos valores. El kilometraje real MUST NOT ser menor al kilometraje actual del vehículo; si es mayor, el kilometraje actual del vehículo MUST actualizarse a ese valor, de modo que la referencia del ciclo nuevo coincida con el vehículo.
 
 #### Scenario: Completado exitoso
 - **GIVEN** una orden `EnEjecucion`
@@ -163,7 +163,12 @@ El taller MUST poder completar una orden solo cuando está `EnEjecucion`, report
 - **GIVEN** un vehículo con kilometraje actual 50.000 y una orden `EnEjecucion`
 - **WHEN** el taller la completa con kilometraje real 50.300
 - **THEN** la orden queda `Completada` y la rutina toma como referencia 50.300 km
-- **AND** el kilometraje actual del vehículo sigue en 50.000
+- **AND** el kilometraje actual del vehículo pasa a 50.300
+
+#### Scenario: Kilometraje real menor al actual del vehículo
+- **GIVEN** un vehículo con kilometraje actual 52.000 y una orden `EnEjecucion`
+- **WHEN** el taller intenta completarla con kilometraje real 50.000
+- **THEN** el sistema rechaza la operación, la orden permanece `EnEjecucion` y el kilometraje del vehículo sigue en 52.000
 
 ### Requirement: Registro de eventos de la orden
 El sistema MUST registrar un evento por cada transición de la orden: generación, cotización, aprobación (indicando si fue automática), rechazo, cancelación, inicio y completado. El registro MUST NOT enviar notificaciones reales.

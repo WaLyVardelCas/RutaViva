@@ -75,6 +75,7 @@ public sealed class Vehicle
 
         routine.Restart(actualMileage, actualDate);
         _domainEvents.Add(new RoutineCycleRestarted(Id, routineId, routine.Cycle.Number));
+        RegisterReading(actualMileage);
         return true;
     }
 
