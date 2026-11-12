@@ -18,7 +18,7 @@ import { Sidebar } from './sidebar';
 export class Shell {
   private readonly router = inject(Router);
   private readonly roles = inject(RoleContext);
-  private readonly portal = inject(Portal);
+  readonly portal = inject(Portal);
   private readonly destroyRef = inject(DestroyRef);
   private readonly mobileQuery = window.matchMedia('(max-width: 959px)');
 

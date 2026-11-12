@@ -41,3 +41,39 @@
 .routines app-badge {
   flex: none;
 }
+
+.sk-copy {
+  display: grid;
+  gap: 8px;
+  flex: 1;
+}
+
+.sk-name {
+  width: 46%;
+  height: 16px;
+}
+
+.sk-line {
+  width: 100%;
+  height: 12px;
+}
+
+.sk-line.short {
+  width: 72%;
+}
+
+.sk-badge {
+  width: 84px;
+  height: 24px;
+  border-radius: 999px;
+  flex: none;
+}
+
+.sk-field,
+.sk-submit {
+  height: 40px;
+}
+
+.sk-submit {
+  width: 148px;
+}

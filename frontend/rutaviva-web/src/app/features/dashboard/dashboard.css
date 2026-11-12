@@ -24,6 +24,49 @@
   margin-bottom: var(--space-md);
 }
 
+.sk-label {
+  width: 62%;
+  height: 14px;
+}
+
+.sk-value {
+  width: 28%;
+  height: 30px;
+  margin-top: var(--space-sm);
+}
+
+.sk-heading {
+  width: 180px;
+  height: 20px;
+  margin-bottom: var(--space-md);
+}
+
+.sk-filter {
+  width: min(360px, 100%);
+  height: 40px;
+  margin-bottom: var(--space-md);
+}
+
+.sk-table {
+  display: grid;
+  gap: 14px;
+}
+
+.sk-line {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.sk-cell {
+  height: 14px;
+}
+
+.sk-cell.head {
+  height: 12px;
+  width: 70%;
+}
+
 .metrics .metric,
 .metrics .metric-label {
   transition: color 160ms ease;

@@ -47,6 +47,78 @@
 
 .content {
   padding: var(--space-xl);
+  padding-bottom: calc(var(--space-xl) + 72px);
+}
+
+.refresh {
+  position: fixed;
+  right: var(--space-xl);
+  bottom: var(--space-xl);
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(15, 98, 254, 0.32);
+  cursor: pointer;
+}
+
+.refresh:hover,
+.refresh:focus-visible {
+  background: var(--color-primary-hover);
+}
+
+.refresh svg {
+  width: 22px;
+  height: 22px;
+}
+
+.refresh.busy svg {
+  animation: refresh-spin 0.8s linear infinite;
+}
+
+.tooltip {
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--color-sidebar);
+  color: #fff;
+  font-size: var(--text-small);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: var(--color-sidebar);
+}
+
+.refresh:hover .tooltip,
+.refresh:focus-visible .tooltip {
+  opacity: 1;
+}
+
+@keyframes refresh-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .content:focus {
@@ -61,11 +133,23 @@
 @media (max-width: 959px) {
   .content {
     padding: var(--space-md);
+    padding-bottom: calc(var(--space-md) + 72px);
+  }
+
+  .refresh {
+    right: var(--space-md);
+    bottom: var(--space-md);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .rail-spacer {
     transition: width 160ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .refresh.busy svg {
+    animation: none;
   }
 }

@@ -1,6 +1,27 @@
 <app-modal [(open)]="open" side [title]="heading()">
   @if (!portal.selectedId()) {
     <p>Elige un vehículo para ver sus rutinas.</p>
+  } @else if (portal.refreshing()) {
+    @if (allowCreate()) {
+      <div class="form" aria-hidden="true">
+        <span class="skeleton sk-field"></span>
+        <span class="skeleton sk-field"></span>
+        <span class="skeleton sk-field"></span>
+        <span class="skeleton sk-submit"></span>
+      </div>
+    }
+    <ul class="routines" aria-busy="true" aria-label="Cargando rutinas">
+      @for (item of [1, 2, 3]; track item) {
+        <li>
+          <div class="sk-copy">
+            <span class="skeleton sk-name"></span>
+            <span class="skeleton sk-line"></span>
+            <span class="skeleton sk-line short"></span>
+          </div>
+          <span class="skeleton sk-badge"></span>
+        </li>
+      }
+    </ul>
   } @else {
     @if (allowCreate()) {
       <form class="form" (submit)="add($event)">

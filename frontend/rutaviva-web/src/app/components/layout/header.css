@@ -20,10 +20,6 @@
   min-width: 0;
 }
 
-.start button {
-  flex: none;
-}
-
 h1 {
   overflow: hidden;
   font-size: var(--text-h3);
@@ -47,33 +43,8 @@ h1 {
 
 @media (max-width: 639px) {
   :host {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas:
-      "title title"
-      "refresh roles";
-    align-items: center;
     height: auto;
-    row-gap: var(--space-sm);
     padding-top: var(--space-sm);
     padding-bottom: var(--space-sm);
-  }
-
-  .start {
-    display: contents;
-  }
-
-  h1 {
-    grid-area: title;
-  }
-
-  .start button {
-    grid-area: refresh;
-    justify-self: start;
-  }
-
-  .roles {
-    grid-area: roles;
-    justify-self: end;
   }
 }

@@ -1,7 +1,7 @@
 :host {
   position: fixed;
-  right: var(--space-md);
-  bottom: var(--space-md);
+  right: var(--space-xl);
+  bottom: calc(var(--space-xl) + 60px);
   z-index: 70;
   width: min(360px, calc(100vw - 32px));
   pointer-events: none;
@@ -54,4 +54,11 @@
 
 .toast.info {
   border-left-color: var(--color-primary);
+}
+
+@media (max-width: 959px) {
+  :host {
+    right: var(--space-md);
+    bottom: calc(var(--space-md) + 60px);
+  }
 }

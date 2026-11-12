@@ -14,6 +14,7 @@ import { clampPage, pageOf } from '../../shared/pagination';
 })
 export class VehicleList {
   readonly vehicles = input.required<Vehicle[]>();
+  readonly loading = input(false);
   readonly selectedId = input<string | null>(null);
   readonly selected = output<string>();
   readonly kilometers = formatKilometers;

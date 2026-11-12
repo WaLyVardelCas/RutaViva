@@ -1,3 +1,33 @@
+@if (loading()) {
+  <div class="metrics" aria-busy="true">
+    <p class="sr-only">Cargando indicadores</p>
+    @for (item of [1, 2, 3, 4]; track item) {
+      <app-card>
+        <span class="skeleton sk-label"></span>
+        <span class="skeleton sk-value"></span>
+      </app-card>
+    }
+  </div>
+
+  <app-card>
+    <span class="skeleton sk-heading"></span>
+    <span class="skeleton sk-filter"></span>
+    <div class="sk-table" aria-hidden="true">
+      <div class="sk-line">
+        @for (item of [1, 2, 3, 4]; track item) {
+          <span class="skeleton sk-cell head"></span>
+        }
+      </div>
+      @for (row of [1, 2, 3, 4, 5]; track row) {
+        <div class="sk-line">
+          @for (cell of [1, 2, 3, 4]; track cell) {
+            <span class="skeleton sk-cell"></span>
+          }
+        </div>
+      }
+    </div>
+  </app-card>
+} @else {
 <div class="metrics">
   @for (metric of metrics(); track metric.label) {
     <app-card [tone]="metric.tone">
@@ -48,3 +78,4 @@
   </app-data-table>
   <app-paginator [total]="rows().length" [page]="currentPage()" (pageChange)="page.set($event)" />
 </app-card>
+}

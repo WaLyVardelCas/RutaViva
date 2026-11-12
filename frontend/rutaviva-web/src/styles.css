@@ -105,6 +105,24 @@ input {
   line-height: 1.1;
 }
 
+.skeleton {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -123,5 +141,9 @@ input {
   *::after {
     scroll-behavior: auto !important;
     transition: none !important;
+  }
+
+  .skeleton {
+    animation: none;
   }
 }

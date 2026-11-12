@@ -20,6 +20,7 @@ import { clampPage, pageOf } from '../../shared/pagination';
 })
 export class Dashboard {
   private readonly portal = inject(Portal);
+  readonly loading = this.portal.refreshing;
   readonly query = signal('');
   readonly page = signal(1);
   readonly label = statusLabel;

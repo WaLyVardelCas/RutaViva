@@ -1,4 +1,20 @@
-@if (vehicles().length === 0) {
+@if (loading()) {
+  <div aria-busy="true">
+    <p class="sr-only">Cargando vehículos</p>
+    <span class="skeleton sk-search"></span>
+    <ul class="vehicles" aria-hidden="true">
+      @for (item of [1, 2, 3, 4]; track item) {
+        <li>
+          <div class="identity">
+            <span class="skeleton sk-plate"></span>
+            <span class="skeleton sk-km"></span>
+          </div>
+          <span class="skeleton sk-action"></span>
+        </li>
+      }
+    </ul>
+  </div>
+} @else if (vehicles().length === 0) {
   <p class="empty">Todavía no hay vehículos.</p>
 } @else {
   <div class="filter">

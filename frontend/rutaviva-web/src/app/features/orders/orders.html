@@ -1,4 +1,20 @@
-@if (visible().length === 0) {
+@if (portal.refreshing()) {
+  <div class="stack" aria-busy="true">
+    <p class="sr-only">Cargando órdenes</p>
+    @for (item of [1, 2, 3]; track item) {
+      <app-card>
+        <div class="order-header">
+          <div class="sk-copy">
+            <span class="skeleton sk-plate"></span>
+            <span class="skeleton sk-sub"></span>
+          </div>
+          <span class="skeleton sk-badge"></span>
+        </div>
+        <span class="skeleton sk-quote"></span>
+      </app-card>
+    }
+  </div>
+} @else if (visible().length === 0) {
   <app-card>
     <p class="muted">{{ emptyMessage() }}</p>
   </app-card>

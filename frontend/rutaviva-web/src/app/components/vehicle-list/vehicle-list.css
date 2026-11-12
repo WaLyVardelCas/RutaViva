@@ -7,6 +7,29 @@
   margin-bottom: var(--space-md);
 }
 
+.sk-search {
+  width: min(360px, 100%);
+  height: 40px;
+  margin-bottom: var(--space-md);
+}
+
+.sk-plate {
+  width: 120px;
+  height: 16px;
+}
+
+.sk-km {
+  width: 72px;
+  height: 12px;
+  margin-top: 6px;
+}
+
+.sk-action {
+  width: 108px;
+  height: 40px;
+  flex: none;
+}
+
 .vehicles {
   display: grid;
   gap: var(--space-sm);
