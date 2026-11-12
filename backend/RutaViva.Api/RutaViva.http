@@ -1,0 +1,54 @@
+@host = http://localhost:5080
+
+# Contratos y respuestas: {{host}}/swagger
+# Las lecturas y la evaluación diaria son operaciones de soporte (grupo Soporte en Swagger).
+
+### Register a vehicle
+POST {{host}}/api/vehicles
+Content-Type: application/json
+
+{
+  "plate": "ABC123",
+  "mileage": 20000
+}
+
+### Add a routine
+POST {{host}}/api/vehicles/{{vehicleId}}/routines
+Content-Type: application/json
+
+{
+  "name": "Cambio de aceite",
+  "kilometers": 10000,
+  "months": 6,
+  "date": "2026-01-01"
+}
+
+### Reading that makes the routine due soon
+POST {{host}}/api/telemetry/readings
+Content-Type: application/json
+
+{
+  "eventId": "evt-due-soon",
+  "plate": "ABC123",
+  "mileage": 29000,
+  "readingDate": "2026-06-01"
+}
+
+### Reading that expires the routine and creates the order
+POST {{host}}/api/telemetry/readings
+Content-Type: application/json
+
+{
+  "eventId": "evt-overdue",
+  "plate": "ABC123",
+  "mileage": 30000,
+  "readingDate": "2026-07-01"
+}
+
+### Daily evaluation with a simulated date
+POST {{host}}/api/processes/daily-evaluation
+Content-Type: application/json
+
+{
+  "date": "2026-07-01"
+}

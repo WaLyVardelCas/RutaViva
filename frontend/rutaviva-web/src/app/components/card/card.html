@@ -1,0 +1,9 @@
+<section class="surface">
+  @if (title()) {
+    <div class="surface-header">
+      <h2>{{ title() }}</h2>
+      <ng-content select="[cardAction]" />
+    </div>
+  }
+  <ng-content />
+</section>

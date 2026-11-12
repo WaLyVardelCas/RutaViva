@@ -1,0 +1,13 @@
+<label [attr.for]="inputId">{{ label() }}</label>
+<input
+  [id]="inputId"
+  [type]="type()"
+  [value]="value()"
+  [disabled]="disabled()"
+  [attr.autocomplete]="autocomplete()"
+  [attr.aria-invalid]="error() ? true : null"
+  [attr.aria-describedby]="error() ? errorId : null"
+  (input)="onInput($event)" />
+@if (error()) {
+  <p class="error" [id]="errorId" role="alert">{{ error() }}</p>
+}

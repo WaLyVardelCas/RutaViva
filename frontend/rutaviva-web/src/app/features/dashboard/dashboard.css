@@ -1,0 +1,71 @@
+:host {
+  display: block;
+}
+
+.note {
+  max-width: 72ch;
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  border: 1px solid #d6e4ff;
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  background: #f5f8ff;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.filter {
+  max-width: 360px;
+  margin-bottom: var(--space-md);
+}
+
+.metrics .metric,
+.metrics .metric-label {
+  transition: color 160ms ease;
+}
+
+.metrics app-card[data-tone='primary']:hover .metric,
+.metrics app-card[data-tone='primary']:hover .metric-label {
+  color: #0043ce;
+}
+
+.metrics app-card[data-tone='success']:hover .metric,
+.metrics app-card[data-tone='success']:hover .metric-label {
+  color: #047857;
+}
+
+.metrics app-card[data-tone='warning']:hover .metric,
+.metrics app-card[data-tone='warning']:hover .metric-label {
+  color: #b45309;
+}
+
+.metrics app-card[data-tone='danger']:hover .metric,
+.metrics app-card[data-tone='danger']:hover .metric-label {
+  color: #b91c1c;
+}
+
+.metrics app-card[data-tone='navy']:hover .metric,
+.metrics app-card[data-tone='navy']:hover .metric-label {
+  color: var(--color-sidebar);
+}
+
+@media (max-width: 959px) {
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .filter {
+    max-width: none;
+  }
+}

@@ -1,0 +1,17 @@
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+@if (mobile() && menuOpen()) {
+  <button class="backdrop" type="button" tabindex="-1" aria-label="Cerrar menú" (click)="menuOpen.set(false)"></button>
+}
+
+<app-sidebar [open]="menuOpen()" (toggled)="toggleMenu()" (navigated)="closeAfterNavigation()" />
+<div class="rail-spacer" [class.expanded]="menuOpen() && !mobile()" aria-hidden="true"></div>
+
+<div class="workspace">
+  <app-header [title]="heading()" />
+  <main id="contenido" class="content" tabindex="-1">
+    <router-outlet />
+  </main>
+</div>
+
+<app-toaster />

@@ -1,0 +1,9 @@
+.stack {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.muted {
+  margin-bottom: var(--space-md);
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,29 @@
+@if (vehicles().length === 0) {
+  <p class="empty">Todavía no hay vehículos.</p>
+} @else {
+  <div class="filter">
+    <app-text-field
+      label="Buscar por placa"
+      type="search"
+      autocomplete="off"
+      [value]="query()"
+      (valueChange)="filter($event)" />
+  </div>
+
+  @if (filtered().length === 0) {
+    <p class="empty">Ninguna placa coincide con la búsqueda.</p>
+  } @else {
+    <ul class="vehicles">
+      @for (vehicle of visible(); track vehicle.id) {
+        <li [class.active]="selectedId() === vehicle.id">
+          <div class="identity">
+            <strong>{{ vehicle.plate }}</strong>
+            <span>{{ kilometers(vehicle.currentMileage) }} km</span>
+          </div>
+          <button appButton type="button" variant="secondary" (click)="selected.emit(vehicle.id)">Ver rutina</button>
+        </li>
+      }
+    </ul>
+    <app-paginator [total]="filtered().length" [page]="currentPage()" (pageChange)="page.set($event)" />
+  }
+}

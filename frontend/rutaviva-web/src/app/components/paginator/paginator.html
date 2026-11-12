@@ -1,0 +1,10 @@
+@if (total() > pageSize()) {
+  <nav class="pager" aria-label="Paginación">
+    <p>{{ rangeLabel() }}</p>
+    <div class="controls">
+      <button type="button" (click)="go(page() - 1)" [disabled]="page() <= 1">Anterior</button>
+      <span>Página {{ page() }} de {{ pages() }}</span>
+      <button type="button" (click)="go(page() + 1)" [disabled]="page() >= pages()">Siguiente</button>
+    </div>
+  </nav>
+}

@@ -1,0 +1,32 @@
+<div class="quote" [attr.data-status]="order().status" [attr.data-has]="order().amount == null ? 'no' : 'yes'">
+  <p class="quote-label">Cotización</p>
+  @if (order().amount == null && role() === roles.Workshop && order().status === orderStatus.Created) {
+    <p class="quote-notice">Esta orden todavía no tiene cotización.</p>
+    <p>Hasta COP 1.500.000 queda aprobada al enviarla. Un monto mayor queda pendiente de que el cliente la apruebe o la rechace.</p>
+    <div class="actions">
+      <app-text-field
+        label="Monto en COP"
+        type="number"
+        [value]="amount() == null ? '' : '' + amount()"
+        (valueChange)="changeAmount($event)" />
+      <button appButton type="button" (click)="send.emit()">Enviar cotización</button>
+    </div>
+  } @else if (order().amount == null) {
+    <p class="quote-empty">Todavía no hay cotización.</p>
+  } @else {
+    <p class="quote-amount">{{ money(order().amount) }}</p>
+    @if (order().status === orderStatus.Quoted) {
+      <p class="quote-notice">Pendiente de decisión del cliente. Supera COP 1.500.000.</p>
+    } @else if (order().automaticApproval === true) {
+      <p>Aprobada automáticamente, porque no supera COP 1.500.000.</p>
+    } @else if (order().automaticApproval === false) {
+      <p>Aprobada por el cliente.</p>
+    }
+    @if (role() === roles.Client && order().status === orderStatus.Quoted) {
+      <div class="actions">
+        <button appButton type="button" (click)="approve.emit()">Aprobar cotización</button>
+        <button appButton type="button" variant="danger" (click)="reject.emit()">Rechazar cotización</button>
+      </div>
+    }
+  }
+</div>

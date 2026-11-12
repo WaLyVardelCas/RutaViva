@@ -1,0 +1,32 @@
+<app-modal [(open)]="open" side [title]="heading()">
+  @if (!portal.selectedId()) {
+    <p>Elige un vehículo para ver sus rutinas.</p>
+  } @else {
+    @if (allowCreate()) {
+      <form class="form" (submit)="add($event)">
+        <app-text-field label="Nombre" autocomplete="off" [value]="name" (valueChange)="name = $event" />
+        <app-text-field label="Kilómetros" type="number" [value]="kilometers" (valueChange)="kilometers = $event" />
+        <app-text-field label="Meses" type="number" [value]="months" (valueChange)="months = $event" />
+        <button appButton type="submit">Agregar rutina</button>
+      </form>
+    }
+
+    @if (portal.routines().length === 0) {
+      <p>Este vehículo no tiene rutinas.</p>
+    } @else {
+      <ul class="routines">
+        @for (routine of visibleRoutines(); track routine.id) {
+          <li>
+            <div>
+              <strong>{{ routine.name }}</strong>
+              <p>Cada {{ interval(routine) }}. Ciclo {{ routine.cycleNumber }}, referencia {{ mileage(routine.referenceMileage) }} km / {{ routine.referenceDate }}.</p>
+              <p>Límite: {{ routine.mileageLimit ?? '—' }} km / {{ routine.dateLimit ?? '—' }}</p>
+            </div>
+            <app-badge [tone]="tone(routine.status)">{{ label(routine.status) }}</app-badge>
+          </li>
+        }
+      </ul>
+      <app-paginator [total]="portal.routines().length" [page]="currentPage()" (pageChange)="page.set($event)" />
+    }
+  }
+</app-modal>

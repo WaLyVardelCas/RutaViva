@@ -1,0 +1,10 @@
+@host = http://localhost:5080
+
+# Los ejemplos de la demo están en RutaViva.http.
+# Contratos y respuestas: {{host}}/swagger
+# Telemetría y evaluación diaria aparecen en el grupo Soporte.
+
+GET {{host}}/swagger/v1/swagger.json
+Accept: application/json
+
+###

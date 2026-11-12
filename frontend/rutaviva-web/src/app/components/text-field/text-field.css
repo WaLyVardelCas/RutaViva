@@ -1,0 +1,33 @@
+:host {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+label {
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  min-height: 40px;
+  padding: var(--space-sm) 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+input:disabled {
+  background: #f1f5f9;
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
+:host.invalid input {
+  border-color: var(--color-danger);
+}
+
+.error {
+  color: var(--color-danger);
+  font-size: var(--text-small);
+}

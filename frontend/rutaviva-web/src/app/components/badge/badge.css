@@ -1,0 +1,41 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 999px;
+  font-size: var(--text-small);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+:host.success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+:host.warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+:host.danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+:host.neutral {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+:host.info {
+  background: #e8eef7;
+  color: #1e3a5f;
+}
+
+:host.progress {
+  background: #dbeafe;
+  color: #1d4ed8;
+}

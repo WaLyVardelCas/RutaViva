@@ -1,0 +1,48 @@
+.stack {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.muted {
+  color: var(--color-text-secondary);
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.order-header h2 {
+  font-size: var(--text-h4);
+}
+
+.order-header p,
+.execution {
+  color: var(--color-text-secondary);
+}
+
+.execution {
+  margin-top: var(--space-md);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.actions app-text-field {
+  flex: 1 1 180px;
+}
+
+@media (max-width: 719px) {
+  .order-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

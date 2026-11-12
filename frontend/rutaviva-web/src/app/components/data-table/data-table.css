@@ -1,0 +1,44 @@
+.rv-table-scroll {
+  overflow-x: auto;
+}
+
+.rv-table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-body);
+}
+
+.rv-table-scroll caption {
+  caption-side: bottom;
+  padding-top: var(--space-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  text-align: left;
+}
+
+.rv-table-scroll th {
+  padding: 12px var(--space-md);
+  background: #f1f5f9;
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.rv-table-scroll td {
+  padding: 12px var(--space-md);
+  color: var(--color-text-primary);
+  vertical-align: middle;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.rv-table-scroll tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.rv-table-scroll tbody tr:hover {
+  outline: 1px solid #b9d0ff;
+  outline-offset: -1px;
+}

@@ -1,0 +1,57 @@
+@if (visible().length === 0) {
+  <app-card>
+    <p class="muted">{{ emptyMessage() }}</p>
+  </app-card>
+} @else {
+  <div class="stack">
+    @for (order of pageOrders(); track order.id) {
+      <app-card>
+        <div class="order-header">
+          <div>
+            <h2>{{ portal.vehicleLabel(order.vehicleId) }}</h2>
+            <p>{{ portal.routineNameOf(order) }}</p>
+          </div>
+          <app-badge [tone]="tone(order.status)">{{ label(order.status) }}</app-badge>
+        </div>
+
+        <app-quote-panel
+          [order]="order"
+          [role]="portal.role()"
+          [amount]="amounts[order.id] ?? null"
+          (amountChange)="amounts[order.id] = $event"
+          (send)="quote(order)"
+          (approve)="portal.approve(order)"
+          (reject)="portal.reject(order)" />
+
+        @if (order.actualMileage != null) {
+          <p class="execution">Ejecutado a {{ kilometers(order.actualMileage) }} km el {{ order.actualDate }}.</p>
+        }
+
+        @if ((portal.role() === roles.Client && canCancel(order)) || (portal.role() === roles.Workshop && (order.status === orderStatus.Approved || order.status === orderStatus.InProgress))) {
+          <div class="actions">
+            @if (portal.role() === roles.Client && canCancel(order)) {
+              <button appButton type="button" variant="secondary" (click)="portal.cancel(order)">Cancelar orden</button>
+            }
+            @if (portal.role() === roles.Workshop && order.status === orderStatus.Approved) {
+              <button appButton type="button" (click)="portal.startService(order)">Iniciar servicio</button>
+            }
+            @if (portal.role() === roles.Workshop && order.status === orderStatus.InProgress) {
+              <app-text-field
+                label="Kilometraje real"
+                type="number"
+                [value]="actualMileages[order.id] == null ? '' : '' + actualMileages[order.id]"
+                (valueChange)="setMileage(order.id, $event)" />
+              <app-text-field
+                label="Fecha real"
+                type="date"
+                [value]="dateOf(order.id)"
+                (valueChange)="setDate(order.id, $event)" />
+              <button appButton type="button" (click)="complete(order)">Completar</button>
+            }
+          </div>
+        }
+      </app-card>
+    }
+  </div>
+  <app-paginator [total]="visible().length" [page]="currentPage()" (pageChange)="page.set($event)" />
+}

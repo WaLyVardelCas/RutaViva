@@ -1,0 +1,29 @@
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  @switch (icon()) {
+    @case ('home') {
+      <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z" />
+    }
+    @case ('vehicles') {
+      <path d="M3 16V8h11l4 4v4" />
+      <path d="M3 16h18" />
+      <circle cx="7.5" cy="16.5" r="1.5" />
+      <circle cx="16.5" cy="16.5" r="1.5" />
+    }
+    @case ('routines') {
+      <path d="M20 12a8 8 0 1 1-2.3-5.7" />
+      <path d="M20 4v5h-5" />
+    }
+    @case ('orders') {
+      <rect x="6" y="4" width="12" height="16" rx="2" />
+      <path d="M9 4.5h6v2H9zM9 11h6M9 15h4" />
+    }
+    @case ('quotes') {
+      <path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
+      <path d="M14 3v5h5M8 13h8M8 17h5" />
+    }
+    @case ('progress') {
+      <circle cx="12" cy="12" r="8" />
+      <path d="M10 9.5v5l4.5-2.5z" />
+    }
+  }
+</svg>

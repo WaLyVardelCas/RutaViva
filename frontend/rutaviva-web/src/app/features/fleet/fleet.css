@@ -1,0 +1,20 @@
+.stack {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-md);
+}
+
+.form app-text-field {
+  flex: 1 1 180px;
+}
+
+.muted {
+  margin-bottom: var(--space-md);
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,233 @@
+:host {
+  position: fixed;
+  z-index: 15;
+  inset: 0 auto 0 0;
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: var(--sidebar-rail);
+  height: 100vh;
+  height: 100dvh;
+  background: var(--color-surface);
+  color: #5c6b7a;
+  border-right: 1px solid var(--color-border);
+  overflow: visible;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  height: var(--header-height);
+  background: var(--color-sidebar);
+}
+
+.hamburger {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.hamburger:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hamburger svg {
+  width: 22px;
+  height: 22px;
+}
+
+.brand,
+.view {
+  display: none;
+}
+
+.brand {
+  align-items: center;
+  gap: 12px;
+  margin: var(--space-lg) var(--space-md) 0;
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.mark svg {
+  width: 22px;
+  height: 22px;
+}
+
+.name,
+.slogan {
+  display: block;
+}
+
+.name {
+  font-size: var(--text-h3);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.slogan {
+  margin-top: var(--space-xs);
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  line-height: 1.4;
+}
+
+.nav {
+  display: grid;
+  align-content: start;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+  padding: 0 var(--space-sm);
+}
+
+.nav a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  background: #f3f6f9;
+  color: var(--color-sidebar);
+}
+
+.nav a.active {
+  background: #e8eef5;
+  color: var(--color-sidebar);
+  font-weight: 600;
+}
+
+.label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:host:not(.expanded) .nav a:hover .label,
+:host:not(.expanded) .nav a:focus-visible .label {
+  left: calc(100% + 10px);
+  top: 50%;
+  z-index: 2;
+  width: max-content;
+  height: auto;
+  margin: 0;
+  padding: 6px 10px;
+  overflow: visible;
+  clip: auto;
+  transform: translateY(-50%);
+  border-radius: var(--radius-sm);
+  background: var(--color-sidebar);
+  color: #ffffff;
+  font-size: var(--text-small);
+  font-weight: 600;
+  line-height: 1.3;
+  box-shadow: 0 8px 20px rgba(17, 24, 39, 0.18);
+  pointer-events: none;
+}
+
+:host:not(.expanded) .nav a:hover .label::before,
+:host:not(.expanded) .nav a:focus-visible .label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: var(--color-sidebar);
+}
+
+.view {
+  margin-top: auto;
+  padding: var(--space-lg) var(--space-md);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+}
+
+:host(.expanded) {
+  width: var(--sidebar-width);
+  overflow: hidden;
+}
+
+:host(.expanded) .top {
+  justify-content: flex-start;
+  padding-left: 16px;
+}
+
+:host(.expanded) .brand {
+  display: flex;
+}
+
+:host(.expanded) .nav {
+  margin-top: var(--space-lg);
+  padding: 0 var(--space-md);
+}
+
+:host(.expanded) .nav a {
+  justify-content: flex-start;
+  gap: 12px;
+  padding: var(--space-sm) 12px;
+}
+
+:host(.expanded) .label {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+:host(.expanded) .view {
+  display: block;
+}
+
+@media (max-width: 959px) {
+  :host {
+    z-index: 30;
+  }
+
+  :host(.expanded) {
+    width: min(var(--sidebar-width), calc(100vw - 16px));
+    box-shadow: 0 8px 24px rgba(17, 24, 39, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :host {
+    transition: width 160ms ease;
+  }
+}

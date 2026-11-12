@@ -1,0 +1,13 @@
+<div class="stack">
+  <app-card [title]="'Vehículos'">
+    <p class="muted">
+      {{ allowCreate() ? 'Busca la placa y abre sus rutinas. El vehículo nace con las de base; desde el panel puedes agregar otras.' : 'Busca la placa y abre sus rutinas. El taller puede agregar otras; aquí solo se consultan.' }}
+    </p>
+    <app-vehicle-list
+      [vehicles]="portal.vehicles()"
+      [selectedId]="drawerOpen() ? portal.selectedId() : null"
+      (selected)="openRoutines($event)" />
+  </app-card>
+</div>
+
+<app-routine-drawer [(open)]="drawerOpen" [allowCreate]="allowCreate()" />

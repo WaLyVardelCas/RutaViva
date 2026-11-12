@@ -1,0 +1,8 @@
+<div class="toaster">
+  @for (toast of toasts.messages(); track toast.id) {
+    <div class="toast" [class]="toast.tone" [attr.role]="toast.tone === 'danger' ? 'alert' : 'status'">
+      <p>{{ toast.message }}</p>
+      <button type="button" class="close" (click)="toasts.dismiss(toast.id)">Cerrar</button>
+    </div>
+  }
+</div>

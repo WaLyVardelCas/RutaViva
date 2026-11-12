@@ -1,0 +1,19 @@
+<div class="stack">
+  <app-card [title]="'Registrar vehículo'">
+    <form class="form" (submit)="register($event)">
+      <app-text-field label="Placa" autocomplete="off" [value]="plate" (valueChange)="plate = $event" />
+      <app-text-field label="Kilometraje inicial" type="number" [value]="mileage" (valueChange)="mileage = $event" />
+      <button appButton type="submit">Registrar vehículo</button>
+    </form>
+  </app-card>
+
+  <app-card [title]="'Flota'">
+    <p class="muted">Busca una placa y abre sus rutinas.</p>
+    <app-vehicle-list
+      [vehicles]="portal.vehicles()"
+      [selectedId]="drawerOpen() ? portal.selectedId() : null"
+      (selected)="openRoutines($event)" />
+  </app-card>
+</div>
+
+<app-routine-drawer [(open)]="drawerOpen" />

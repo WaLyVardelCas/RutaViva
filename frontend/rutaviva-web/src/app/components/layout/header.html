@@ -1,0 +1,32 @@
+<div class="start">
+  <h1>{{ title() }}</h1>
+  <button
+    appButton
+    type="button"
+    variant="secondary"
+    [disabled]="portal.refreshing()"
+    [attr.aria-busy]="portal.refreshing()"
+    [attr.aria-label]="portal.refreshing() ? 'Actualizando ' + title() : 'Actualizar ' + title()"
+    (click)="portal.load()">
+    {{ portal.refreshing() ? 'Actualizando…' : 'Actualizar' }}
+  </button>
+</div>
+
+<div class="roles" role="group" aria-label="Cambiar vista">
+  <button
+    appButton
+    type="button"
+    [variant]="roles.role() === role.Client ? 'primary' : 'secondary'"
+    [attr.aria-pressed]="roles.role() === role.Client"
+    (click)="choose(role.Client)">
+    Cliente
+  </button>
+  <button
+    appButton
+    type="button"
+    [variant]="roles.role() === role.Workshop ? 'primary' : 'secondary'"
+    [attr.aria-pressed]="roles.role() === role.Workshop"
+    (click)="choose(role.Workshop)">
+    Taller
+  </button>
+</div>

@@ -1,0 +1,57 @@
+.empty {
+  color: var(--color-text-secondary);
+}
+
+.filter {
+  max-width: 360px;
+  margin-bottom: var(--space-md);
+}
+
+.vehicles {
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vehicles li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm) var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  transition: border-color 160ms ease;
+}
+
+.vehicles li:hover {
+  border-color: #b9d0ff;
+}
+
+.vehicles li.active {
+  border-color: var(--color-primary);
+  background: #f5f8ff;
+}
+
+.vehicles li.active:hover {
+  border-color: #b9d0ff;
+}
+
+.identity {
+  display: grid;
+  min-width: 0;
+}
+
+.identity span {
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 639px) {
+  .filter {
+    max-width: none;
+  }
+}

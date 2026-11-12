@@ -1,0 +1,14 @@
+{
+    "dotrush.roslyn.projectOrSolutionFiles": [
+        "c:\\Users\\wanda_vargas\\Pictures\\PERSONAL\\DEV 1\\Reto\\RutaViva\\frontend\\rutaviva-web\\node_modules\\lmdb\\dependencies\\lz4\\lib\\dll\\example\\fullbench-dll.sln",
+        "c:\\Users\\wanda_vargas\\Pictures\\PERSONAL\\DEV 1\\Reto\\RutaViva\\backend\\RutaViva.slnx",
+        "c:\\Users\\wanda_vargas\\Pictures\\PERSONAL\\DEV 1\\Reto\\RutaViva\\backend\\RutaViva.Api\\RutaViva.Api.csproj",
+        "c:\\Users\\wanda_vargas\\Pictures\\PERSONAL\\DEV 1\\Reto\\RutaViva\\backend\\tests\\RutaViva.Api.IntegrationTests\\RutaViva.Api.IntegrationTests.csproj",
+        "c:\\Users\\wanda_vargas\\Pictures\\PERSONAL\\DEV 1\\Reto\\RutaViva\\backend\\RutaViva.Application\\RutaViva.Application.csproj",
+        "c:\\Users\\wanda_vargas\\Pictures\\PERSONAL\\DEV 1\\Reto\\RutaViva\\backend\\tests\\RutaViva.Application.Tests\\RutaViva.Application.Tests.csproj",
+        "c:\\Users\\wanda_vargas\\Pictures\\PERSONAL\\DEV 1\\Reto\\RutaViva\\backend\\RutaViva.Domain\\RutaViva.Domain.csproj",
+        "c:\\Users\\wanda_vargas\\Pictures\\PERSONAL\\DEV 1\\Reto\\RutaViva\\backend\\tests\\RutaViva.Domain.Tests\\RutaViva.Domain.Tests.csproj",
+        "c:\\Users\\wanda_vargas\\Pictures\\PERSONAL\\DEV 1\\Reto\\RutaViva\\backend\\RutaViva.Infrastructure\\RutaViva.Infrastructure.csproj",
+        "c:\\Users\\wanda_vargas\\Pictures\\PERSONAL\\DEV 1\\Reto\\RutaViva\\backend\\RutaViva.Job\\RutaViva.Job.csproj"
+    ]
+}

@@ -1,0 +1,14 @@
+bin/
+obj/
+out/
+.vs/
+*.user
+TestResults/
+
+node_modules/
+dist/
+.angular/
+frontend/rutaviva-web/.angular/
+
+.DS_Store
+Thumbs.db

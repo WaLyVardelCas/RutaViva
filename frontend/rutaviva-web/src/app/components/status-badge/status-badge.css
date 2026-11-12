@@ -1,0 +1,30 @@
+:host {
+  display: contents;
+}
+
+.status {
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  background: #ece7dc;
+  white-space: nowrap;
+}
+
+.status[data-status='UpToDate'],
+.status[data-status='Completed'],
+.status[data-status='Approved'] {
+  background: #d9eadf;
+}
+
+.status[data-status='DueSoon'],
+.status[data-status='Quoted'] {
+  background: #f8e3b0;
+}
+
+.status[data-status='Overdue'],
+.status[data-status='Canceled'] {
+  background: #f3d0c8;
+}
+
+.status[data-status='InProgress'] {
+  background: #d5e4f5;
+}

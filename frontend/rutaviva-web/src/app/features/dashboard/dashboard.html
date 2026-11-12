@@ -1,0 +1,50 @@
+<div class="metrics">
+  @for (metric of metrics(); track metric.label) {
+    <app-card [tone]="metric.tone">
+      <p class="metric-label">{{ metric.label }}</p>
+      <p class="metric">{{ metric.value }}</p>
+    </app-card>
+  }
+</div>
+
+<app-card [title]="workshop() ? 'Órdenes' : 'Órdenes de servicio'">
+  <div class="filter">
+    <app-text-field
+      label="Filtrar por placa, rutina o estado"
+      type="search"
+      autocomplete="off"
+      [value]="query()"
+      (valueChange)="filter($event)" />
+  </div>
+
+  <app-data-table>
+    <table>
+      <caption class="sr-only">Órdenes registradas en la operación.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Placa</th>
+          <th scope="col">Rutina</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Ejecución</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (rows().length === 0) {
+          <tr>
+            <td colspan="4">No hay órdenes para mostrar.</td>
+          </tr>
+        } @else {
+          @for (order of pageRows(); track order.id) {
+            <tr>
+              <td>{{ plate(order) }}</td>
+              <td>{{ routine(order) }}</td>
+              <td><app-badge [tone]="tone(order.status)">{{ label(order.status) }}</app-badge></td>
+              <td>{{ order.actualDate ?? '—' }}</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </app-data-table>
+  <app-paginator [total]="rows().length" [page]="currentPage()" (pageChange)="page.set($event)" />
+</app-card>
